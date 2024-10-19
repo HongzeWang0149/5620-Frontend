@@ -1,40 +1,37 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './login.module.css';
+import styles from './register.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // const response = await axios.post('http://localhost:8080/api/login/', {
+      // const response = await axios.post('http://localhost:8080/api/register/', {
       //   username,
       //   password,
       // });
-      //TODO LOGIN
+      //TODO REGISTER
+      router.replace('/login');
     } catch (error) {
-      setError('Login failed');
+      setError('Register failed');
     }
   };
-
-  const step2Register = () => {
-    router.replace('/register');
-  }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.loginContainer}>
-        <h2 className={styles.loginTitle}>SIGN IN</h2>
-        <form onSubmit={handleLogin}>
+        <h2 className={styles.loginTitle}>SIGN UP</h2>
+        <form onSubmit={handRegister}>
           <div className={styles.formGroup}>
             <label className={styles.label}>Username:</label>
             <input
@@ -56,12 +53,11 @@ const Login = () => {
             />
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          <button type="submit" className={styles.loginButton}>SIGN IN</button>
-          <button type="submit" className={styles.registerButton} onClick={step2Register}>SIGN UP</button>
+          <button type="submit" className={styles.registerButton}>SIGN UP</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
