@@ -16,11 +16,14 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // const response = await axios.post('http://localhost:8080/api/login/', {
-      //   username,
-      //   password,
-      // });
-      //TODO LOGIN
+      const response = await axios.post('http://localhost:8080/api/login', {
+        username,
+        password,
+      });
+      console.log(response.data.body);
+      if (response.status == 200){
+        router.replace('/home');
+      }
     } catch (error) {
       setError('Login failed');
     }
