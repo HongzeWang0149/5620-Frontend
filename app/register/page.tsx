@@ -16,12 +16,13 @@ const Register = () => {
   const handRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // const response = await axios.post('http://localhost:8080/api/register/', {
-      //   username,
-      //   password,
-      // });
-      //TODO REGISTER
-      router.replace('/login');
+      const response = await axios.post('http://localhost:8080/api/register', {
+        username,
+        password,
+      });
+      if (response.status == 200) {
+        router.replace('/login');
+      }
     } catch (error) {
       setError('Register failed');
     }
