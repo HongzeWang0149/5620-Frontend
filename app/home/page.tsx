@@ -3,55 +3,71 @@
 import React, { useState } from 'react';
 import styles from './home.module.css';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
+interface Product {
+  name: string;
+  description: string;
+  price: number;
+  sales: number;
+  stock: number;
+}
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-  const [searchResults, setSearchResults] = useState([
+  const [searchResults, setSearchResults] = useState<Product[]>([
     // 示例数据，未来可以替换为实际的 API 响应
-    {
-      name: 'Product A',
-      description: 'Description For Product A',
-      price: 100,
-      sales: 50,
-      stock: 20,
-    },
-    {
-      name: 'Product B',
-      description: 'Description For Product B',
-      price: 200,
-      sales: 30,
-      stock: 10,
-    },{
-      name: 'Product C',
-      description: 'Description For Product C',
-      price: 200,
-      sales: 30,
-      stock: 10,
-    },{
-      name: 'Product D',
-      description: 'Description For Product D',
-      price: 200,
-      sales: 30,
-      stock: 10,
-    },{
-      name: 'Product E',
-      description: 'Description For Product E',
-      price: 200,
-      sales: 30,
-      stock: 10,
-    },{
-      name: 'Product F',
-      description: 'Description For Product F',
-      price: 200,
-      sales: 30,
-      stock: 10,
-    },
+    // {
+    //   name: 'Product A',
+    //   description: 'Description For Product A',
+    //   price: 100,
+    //   sales: 50,
+    //   stock: 20,
+    // },
+    // {
+    //   name: 'Product B',
+    //   description: 'Description For Product B',
+    //   price: 200,
+    //   sales: 30,
+    //   stock: 10,
+    // },{
+    //   name: 'Product C',
+    //   description: 'Description For Product C',
+    //   price: 200,
+    //   sales: 30,
+    //   stock: 10,
+    // },{
+    //   name: 'Product D',
+    //   description: 'Description For Product D',
+    //   price: 200,
+    //   sales: 30,
+    //   stock: 10,
+    // },{
+    //   name: 'Product E',
+    //   description: 'Description For Product E',
+    //   price: 200,
+    //   sales: 30,
+    //   stock: 10,
+    // },{
+    //   name: 'Product F',
+    //   description: 'Description For Product F',
+    //   price: 200,
+    //   sales: 30,
+    //   stock: 10,
+    // },
   ]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = async (e: React.FormEvent) => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/search', {
+        searchTerm
+      });
+      setSearchResults(response.data);
+      
+    } catch (error) {
+      console.error('search failure', error);
+    }
     searchTerm
   };
 
