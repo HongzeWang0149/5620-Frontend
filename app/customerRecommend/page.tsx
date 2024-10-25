@@ -64,7 +64,7 @@ const CustomerRecommend = () => {
           className={styles.input}
         />
         <button onClick={handleSend} className={styles.sendButton}>Send</button>
-        <button onClick={() => router.replace('/home')} className={styles.backButton}>Back</button>
+        <button onClick={() => router.replace('/roleSelection')} className={styles.backButton}>Back</button>
       </div>
     </div>
   );

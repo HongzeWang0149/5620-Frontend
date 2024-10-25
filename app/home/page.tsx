@@ -82,7 +82,7 @@ const Home = () => {
           className={styles.searchInput}
         />
         <button type="submit" className={styles.searchButton}>Search</button>
-        <button className={styles.aiButton} onClick={() => router.replace('/customerRecommend')}>AI Recommend</button>
+        <button className={styles.aiButton} onClick={() => router.replace('/roleSelection')}>AI Recommend</button>
       </form>
       <div className={styles.resultsContainer}>
         {searchResults.length > 0 ? (
