@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import styles from './customerRecommend.module.css';
+import styles from './merchantRecommend.module.css';
 import { useRouter } from 'next/navigation';
 
-const CustomerRecommend = () => {
+const MerchantRecommend = () => {
   const router = useRouter();
   const [messages, setMessages] = useState([
-    { sender: 'system', text: 'Hello Customer! I can help you find the best products based on your preferences. Just tell me what you are looking for, and I will provide tailored product recommendations.' }
+    { sender: 'system', text: 'Hello Merchant! I can assist you with supply chain strategies, inventory management, and provide recommendations to help improve your product offerings. Please let me know your questions.' }
   ]);
   const [input, setInput] = useState('');
   const chatBoxRef = useRef<HTMLDivElement>(null);
@@ -21,7 +21,7 @@ const CustomerRecommend = () => {
     setInput('');
 
     try {
-      const response = await axios.post('http://localhost:8080/api/customer_recommend/generateRecommend', {
+      const response = await axios.post('http://localhost:8080/api/merchant_recommend/generateRecommend', {
         searchText: input
       });
       const botReply = { sender: 'system', text: response.data.recommendContent };
@@ -41,7 +41,7 @@ const CustomerRecommend = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Customer Service</h1>
+      <h1 className={styles.title}>Merchant Service</h1>
       <div className={styles.chatBox} ref={chatBoxRef}>
         {messages.map((message, index) => (
           <div
@@ -71,4 +71,4 @@ const CustomerRecommend = () => {
   );
 };
 
-export default CustomerRecommend;
+export default MerchantRecommend;
