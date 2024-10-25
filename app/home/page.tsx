@@ -59,21 +59,18 @@ const Home = () => {
   ]);
 
   const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8080/api/search', {
-        searchTerm
+        category: searchTerm
       });
+      console.log(response.data);
       setSearchResults(response.data);
       
     } catch (error) {
       console.error('search failure', error);
     }
-    searchTerm
   };
-
-  const step2Recommend = () => {
-    router.replace('/recommend');
-  }
 
   return (
     <div className={styles.container}>
@@ -87,7 +84,7 @@ const Home = () => {
           className={styles.searchInput}
         />
         <button type="submit" className={styles.searchButton}>Search</button>
-        <button className={styles.aiButton} onClick={step2Recommend}>AI Recommend</button>
+        <button className={styles.aiButton} onClick={() => router.replace('/recommend')}>AI Recommend</button>
       </form>
       <div className={styles.resultsContainer}>
         {searchResults.length > 0 ? (
