@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import styles from './recommend.module.css';
+import styles from './customerRecommend.module.css';
 import { useRouter } from 'next/navigation';
 
-const Recommend = () => {
+const CustomerRecommend = () => {
   const router = useRouter();
   const [messages, setMessages] = useState([
     { sender: 'system', text: 'Hello! How can I assist you today?' }
@@ -70,4 +70,4 @@ const Recommend = () => {
   );
 };
 
-export default Recommend;
+export default CustomerRecommend;
