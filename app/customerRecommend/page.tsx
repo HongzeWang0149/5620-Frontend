@@ -21,10 +21,10 @@ const CustomerRecommend = () => {
     setInput('');
 
     try {
-      const response = await axios.post('http://localhost:8080/api/recommend', {
-        message: input,
+      const response = await axios.post('http://localhost:8080/api/customer_recommend/generateRecommend', {
+        searchText: input
       });
-      const botReply = { sender: 'system', text: response.data.reply };
+      const botReply = { sender: 'system', text: response.data.recommendContent };
       setMessages((prevMessages) => [...prevMessages, botReply]);
     } catch (error) {
       console.error('Message sending failed', error);
