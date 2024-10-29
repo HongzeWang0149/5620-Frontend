@@ -64,7 +64,7 @@ const Home = () => {
       const response = await axios.post('http://localhost:8080/api/search', {
         category: searchTerm
       });
-      
+      setSearchResults(response.data);
     } catch (error) {
       console.error('search failure', error);
     }
