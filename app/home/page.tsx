@@ -30,7 +30,7 @@ const Home = () => {
     try {
       const userId = localStorage.getItem('userId');
 
-      const response = await axios.post('http://localhost:8080/api/recommendation/user',
+      const response = await axios.post('http://13.55.190.75:8080/api/recommendation/user',
         {
           userId: userId
         },
