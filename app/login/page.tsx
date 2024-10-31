@@ -20,8 +20,8 @@ const Login = () => {
         username,
         password,
       });
-      console.log(response.data.body);
       if (response.status == 200){
+        localStorage.setItem("userId", response.data.userId);
         router.replace('/home');
       }
     } catch (error) {
