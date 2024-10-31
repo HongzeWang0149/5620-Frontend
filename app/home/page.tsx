@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './home.module.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -21,6 +21,32 @@ const Home = () => {
   const [tips, setTips] = useState('Search Result Display Here...');
   const router = useRouter();
   const [searchResults, setSearchResults] = useState<Product[]>([]);
+
+  useEffect(()=>{
+    fetchData();
+  }, [router])
+
+  const fetchData = async () => {
+    try {
+      const userId = localStorage.getItem('userId');
+
+      const response = await axios.post('http://localhost:8080/api/recommendation/user',
+        {
+          userId: userId
+        },
+      );
+      console.log(response)
+      setSearchResults(
+        response.data.recommendedProducts.map((item: any) => ({
+          ...item,
+          clicked: false,
+        }))
+      );
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
