@@ -83,7 +83,7 @@ const Home = () => {
 
   const handleSubmitBehavior = async () => {
     try {
-      await axios.post('http://localhost:8080/api/behavior/log', 
+      await axios.post('http://13.55.190.75:8080/api/behavior/log', 
         searchResults.map(product => ({
           userId: localStorage.getItem("userId"),
           productId: product.id,
